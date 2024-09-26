@@ -1,0 +1,27 @@
+# Documentation about Garden projects can be found at https://docs.garden.io/using-garden/projects
+# Reference for Garden projects can be found at https://docs.garden.io/reference/project-config
+
+apiVersion: garden.io/v1
+kind: Project
+name: pull-secret-problem
+
+defaultEnvironment: preview
+
+environments:
+  - name: preview
+    defaultNamespace: test-pull-secret-problem
+providers:
+  - name: kubernetes
+    environments: [preview]
+    # replace this with your remote k8s context
+    context: beast-context
+    namespace: ${environment.namespace} # <--- Ensure the K8s namespace matches the Garden namespace
+    defaultHostname: ${var.base-hostname}
+    # replace this with your docker registry
+    deploymentRegistry:
+      hostname: australia-southeast1-docker.pkg.dev
+      namespace: <GCP_PROJECT_ID>/garden-repo
+    # replace this with your docker secret name and namespace
+    imagePullSecrets:
+      - name: gar-config
+        namespace: default
