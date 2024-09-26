@@ -16,7 +16,6 @@ providers:
     # replace this with your remote k8s context
     context: beast-context
     namespace: ${environment.namespace} # <--- Ensure the K8s namespace matches the Garden namespace
-    defaultHostname: ${var.base-hostname}
     # replace this with your docker registry
     deploymentRegistry:
       hostname: australia-southeast1-docker.pkg.dev

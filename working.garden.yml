@@ -1,0 +1,7 @@
+kind: Deploy
+name: app-working
+type: container
+dependencies:
+  - build.app
+spec:
+  image: ${actions.build.app.outputs.deploymentImageId}
